@@ -12,7 +12,7 @@ This is a trigger class that gets fired on insert and update events on `Sales__c
 
 This is a helper class for the `SalesTrigger`. This class provides the logic for processing `Sales__c` objects before they are inserted and after they are updated. This class also includes the `createAndUpdateStockEntries` method for creating and updating stock entries.
 
-## Class Descriptions
+## Class Method Descriptions
 
 ### `SalesHelper` Methods:
 
