@@ -1,3 +1,9 @@
+/*
+*********************************************************
+@Class Name    : SalesHelper
+@description   : Class that contains methods to process sales data and manage stock entries
+********************************************************
+*/
 public with sharing class SalesHelper {
     public SalesHelper() {
     }
@@ -9,7 +15,14 @@ public with sharing class SalesHelper {
         private Decimal quantity;
     }
 
-    // Function used to process incoming Sales records that are being inserted
+    /*
+    *********************************************************
+    @Method Name   : beforeInsert
+    @description   : Process incoming Sales records that are being inserted, create temporary data for new stock entries and update quantities from the incoming Sales records
+    @param         : List<Sales__c> incomingSalesList
+    @return        : Null
+    ********************************************************
+    */
     public static void beforeInsert(List <Sales__c> incomingSalesList){
         // Instantiate a List used to temporarally hold data for new Stock Entries 
         List<PendingStockEntry> pseList = new List<PendingStockEntry>();
@@ -60,8 +73,14 @@ public with sharing class SalesHelper {
       	}
     }
        
-
-
+    /*
+    *********************************************************
+    @Method Name   : afterUpdate
+    @description   : Process incoming Sales records that are being updated, create temporary data for new stock entries and update quantities from the incoming Sales records
+    @param         : List<Sales__c> incomingSalesList
+    @return        : Null
+    ********************************************************
+    */
     public static void afterUpdate(List <Sales__c> incomingSalesList){
 
         // Instantiate a List used to  hold updated Sales records 
@@ -111,7 +130,14 @@ public with sharing class SalesHelper {
 
 
 
-    //Function to Create and Update stock entry records, requires SalesMAP + pseList
+    /*
+    *********************************************************
+    @Method Name   : createAndUpdateStockEntries
+    @description   : Create and update stock entry records based on the provided Sales map and pending stock entry list
+    @param         : List<PendingStockEntry> pseList, Map<String,Decimal> incomingSalesMap
+    @return        : Null
+    ********************************************************
+    */
     private static void createAndUpdateStockEntries(List<PendingStockEntry> pseList, Map<String,Decimal> incomingSalesMap ){
 
         //Set used to gather all the unique skus to be used for querying the items
